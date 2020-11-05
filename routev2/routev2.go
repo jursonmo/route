@@ -28,6 +28,12 @@ uint32|masklen32|maskLen31|maskLen30......
 查找路由时，最长匹配原则，先判断uint32的置位情况，以此判断数组哪个槽位有路由条目，没有路由条目的槽位对应置位为0，
 有路由条目的槽位对应置位为1.
 
+或者干脆记录有掩码长度,但是掩码长度大的在路由表放到前面的槽里
+[0]{maskLen:24, rthash:xxx}
+[1]{maskLen:22, rthash:xxx}
+[2]{maskLen:16, rthash:xxx}
+[3]{maskLen:0, rthash:xxx}
+
 还可以分段, 锁颗粒度变小，锁的使用也清晰。
 */
 type NetWork uint32
