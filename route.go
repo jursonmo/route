@@ -22,11 +22,12 @@ uint32|masklen32|maskLen31|maskLen30......
 查找路由时，最长匹配原则，先判断uint32的置位情况，以此判断数组哪个槽位有路由条目，没有路由条目的槽位对应置位为0，
 有路由条目的槽位对应置位为1.
 
-或者干脆记录有掩码长度,但是掩码长度大的在路由表放到前面的槽里，避免每次都检测槽里有没有路由
-[0]{maskLen:24, rthash:xxx}
-[1]{maskLen:22, rthash:xxx}
-[2]{maskLen:16, rthash:xxx}
-[3]{maskLen:0, rthash:xxx}
+或者干脆记录有掩码长度,但是掩码长度大的在路由表放到前面的槽里，避免每次都检测槽里有没有路由.
+[0]{maskLen:24, rtNum:xxx ,rtHash:xxx, rtAarry:xxx}
+[1]{maskLen:22, rtNum:xxx ,rtHash:xxx, rtAarry:xxx}
+[2]{maskLen:16, rtNum:xxx ,rtHash:xxx, rtAarry:xxx}
+[3]{maskLen:0, rtNum:xxx ,rtHash:xxx, rtAarry:xxx}
+如果路由条目的数量rtNum 小于某个数值(比如4)那么就把路由条目放在rtAarry数组，如果rtNum超过一定的数值，就用哈希表rtHash来存储路由条目
 */
 const (
 	maskMaxLen = 32
